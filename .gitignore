@@ -205,3 +205,36 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Lunaclaw data directories
+.lunaclaw/
+
+# Claude Code / Claw Code
+.claude/
+.claw/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# uv
+uv.lock
+
+# Hooks
+.git/hooks/
+
+# Superpowers (generated specs/plans)
+docs/superpowers/
+
+# Binaries
+*.exe
+*.dll
+*.dylib
+*.bin

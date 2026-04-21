@@ -1,0 +1,85 @@
+# Model to use. If null, reads from ANTHROPIC_MODEL env var, then falls back to claude-sonnet-4-6.
+model: null
+
+# --- Model Configuration Examples ---
+#
+# All provider config is done via environment variables, same as Claude Code.
+# No named providers — just set the right env vars for your service.
+#
+# Anthropic (default):
+#   export ANTHROPIC_API_KEY=sk-xxx
+#
+# Anthropic via AWS Bedrock:
+#   export AWS_ACCESS_KEY_ID=xxx
+#   export AWS_SECRET_ACCESS_KEY=xxx
+#   export AWS_REGION_NAME=us-east-1
+#   model: "bedrock/anthropic.claude-sonnet-4-6-v1"
+#
+# Anthropic via Google Vertex:
+#   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
+#   export VERTEX_PROJECT=your-project
+#   export VERTEX_LOCATION=us-central1
+#   model: "vertex_ai/claude-sonnet-4-6@20250514"
+#
+# OpenAI:
+#   export OPENAI_API_KEY=sk-xxx
+#   model: "gpt-4o"
+#
+# Alibaba Cloud (DashScope, Anthropic-compatible):
+#   export ANTHROPIC_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+#   export ANTHROPIC_API_KEY=your-dashscope-key
+#   export ANTHROPIC_MODEL=qwen-plus
+#
+# Doubao (Volcengine, Anthropic-compatible):
+#   export ANTHROPIC_AUTH_TOKEN=your-ark-key
+#   export ANTHROPIC_BASE_URL=https://ark.cn-beijing.volces.com/api/v3
+#   export ANTHROPIC_MODEL=your-endpoint-id
+#
+# DeepSeek:
+#   export OPENAI_API_KEY=your-deepseek-key
+#   export OPENAI_BASE_URL=https://api.deepseek.com/v1
+#   model: "openai/deepseek-chat"
+#
+# --- Local Model Servers ---
+#
+# Ollama (OpenAI-compatible):
+#   export OPENAI_API_KEY=ollama
+#   export OPENAI_BASE_URL=http://localhost:11434/v1
+#   model: "openai/llama3"
+#
+# vLLM (OpenAI-compatible):
+#   export OPENAI_API_KEY=token-abc123
+#   export OPENAI_BASE_URL=http://localhost:8000/v1
+#   model: "openai/your-model-name"
+#
+# llama.cpp server (OpenAI-compatible):
+#   export OPENAI_API_KEY=not-needed
+#   export OPENAI_BASE_URL=http://localhost:8080/v1
+#   model: "openai/local-model"
+#
+# LM Studio (OpenAI-compatible):
+#   export OPENAI_API_KEY=lm-studio
+#   export OPENAI_BASE_URL=http://localhost:1234/v1
+#   model: "openai/your-loaded-model"
+#
+# Note: For any OpenAI-compatible server, prefix the model name with "openai/"
+# so litellm routes it correctly through the OpenAI provider.
+
+rag:
+  embedding_model: "local"  # "local" uses sentence-transformers, or set to a model name for API-based
+  chunk_size: 512
+  chunk_overlap: 50
+  data_dir: "~/.lunaclaw/rag"
+
+memory:
+  data_dir: "~/.lunaclaw/memory"
+
+audit:
+  enabled: false
+  log_dir: "~/.lunaclaw/audit"
+  log_level: "full"  # full | summary | off
+
+planner:
+  auto: true       # auto-detect when to invoke planner for complex tasks
+  threshold: 3     # invoke planner when estimated steps >= this value
+  model: null      # optional: use a cheaper/faster model for planning
